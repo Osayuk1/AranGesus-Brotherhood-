@@ -121,6 +121,7 @@ function buy() {
     });
 }
 
+// Event listeners for buttons
 document.getElementById('calculate').addEventListener('click', calculatePrice);
 document.getElementById('addToCart').addEventListener('click', addToCart);
 document.getElementById('buy').addEventListener('click', buy); 
