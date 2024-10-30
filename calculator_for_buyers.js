@@ -50,9 +50,11 @@ function calculatePrice() {
     if (sellRates[selectedItem] && quantity) {
         const price = (1 / sellRates[selectedItem]) * quantity;
         document.getElementById('price').innerText = `${price.toFixed(2)} gold`;
+        console.log(`Calculated price for ${selectedItem}: ${price.toFixed(2)} gold`);
         return { item: selectedItem, quantity, price: price.toFixed(2) };
     } else {
         document.getElementById('price').innerText = "Invalid selection or quantity.";
+        console.log("Invalid selection or quantity.");
         return null;
     }
 }
@@ -67,6 +69,7 @@ function addToCart() {
         } else {
             cart[itemData.item] = { quantity: itemData.quantity, price: itemData.price };
         }
+        console.log(`Added to cart: ${JSON.stringify(cart)}`);
         updateCart();
     }
 }
@@ -111,8 +114,10 @@ function buy() {
             updateCart();  // Update cart display
             document.getElementById('price').innerText = "";  // Clear price display
             document.getElementById('quantity').value = "";  // Clear quantity input
+            console.log("Purchase data sent to webhook.");
         } else {
             alert("Failed to send data to webhook.");
+            console.error("Failed to send data to webhook.");
         }
     })
     .catch(error => {
@@ -122,6 +127,15 @@ function buy() {
 }
 
 // Event listeners for buttons
-document.getElementById('calculate').addEventListener('click', calculatePrice);
-document.getElementById('addToCart').addEventListener('click', addToCart);
-document.getElementById('buy').addEventListener('click', buy); 
+document.getElementById('calculate').addEventListener('click', () => {
+    console.clear(); // Clears console each time for fresh debug output
+    calculatePrice();
+});
+document.getElementById('addToCart').addEventListener('click', () => {
+    console.clear();
+    addToCart();
+});
+document.getElementById('buy').addEventListener('click', () => {
+    console.clear();
+    buy();
+}); 
