@@ -52,17 +52,25 @@
         <input type="number" id="quantityInput" min="1" value="1">
 
         <button id="calculatePriceBtn">Calculate Price</button>
+        <button id="addToCartBtn">Add to Cart</button>
 
         <div id="result"></div>
-        
-        <!-- Cart Section -->
-        <div id="cart">
-            <h2>Cart</h2>
-            <ul id="cartItems"></ul>
-            <p id="cartTotal"></p>
-            <button id="buyBtn">Buy</button>
-        </div>
     </div>
+    
+    <!-- Cart Section -->
+    <div id="cart">
+        <h2>Cart</h2>
+        <label for="discordName">Discord Name:</label>
+        <input type="text" id="discordName" placeholder="Enter Discord name">
+
+        <label for="tradeName">Trade Name:</label>
+        <input type="text" id="tradeName" placeholder="Enter Trade name">
+
+        <ul id="cartItems"></ul>
+        <p id="cartTotal"></p>
+        <button id="buyBtn">Buy</button>
+    </div>
+
     <script src="calculator_for_buyers.js"></script>
 </body>
 </html>
