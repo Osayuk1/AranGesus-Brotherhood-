@@ -1,25 +1,110 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("calculator-form");
-    const resultDiv = document.getElementById("result");
-    
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form submission
-        
-        // Get selected item and quantity
-        const selectedItem = document.getElementById("item-select");
-        const quantity = parseFloat(document.getElementById("quantity").value);
-        
-        if (selectedItem.value) {
-            // Get the sell rate from the selected option
-            const sellRate = parseFloat(selectedItem.options[selectedItem.selectedIndex].dataset.price);
-            
-            // Calculate price using the formula: (Quantity / Sell Rate)
-            const price = quantity / sellRate;
+const itemRates = {
+    "Akomeric": 1 / 810,
+    "Bloodroot": 1 / 900,
+    "Hyssop": 1 / 450,
+    "Safflower": 1 / 225,
+    "Sage Leaf": 1 / 225,
+    "WolfMint": 1 / 585,
+    "Vissinel": 1 / 630,
+    "Sunburst Flower": 1 / 22.5,
+    "Ember Fern": 1 / 22.5,
+    "Stone": 1 / 720,
+    "Copper Ore": 1 / 675,
+    "Iron Ore": 1 / 315,
+    "Gold Ore": 1 / 720,
+    "Mithril Ore": 1 / 315,
+    "Evergreen log": 1 / 360,
+    "Oak log": 1 / 360,
+    "Pine log": 1 / 360,
+    "Maple log": 1 / 360,
+    "Birch log": 1 / 360,
+    "Spruce log": 1 / 360,
+    "Fir log": 1 / 360,
+    "Ash log": 1 / 270,
+    "Willow log": 1 / 243,
+    "Eucalyptus log": 1 / 180,
+    "Elder log": 1 / 270,
+    "RedWood log": 1 / 72,
+    "Cedar log": 1 / 54,
+    "Cherry Blossom log": 1 / 36,
+    "Mahogany log": 1 / 27,
+    "Chesnut log": 1 / 22.5,
+    "Magnolia log": 1 / 14,
+    "Ginko log": 1 / 8,
+    "Feather": 1 / 405,
+    "Hide": 1 / 405,
+    "Yarn": 1 / 720,
+};
 
-            // Display the result
-            resultDiv.innerHTML = `Total price for ${quantity} ${selectedItem.value}(s): ${price.toFixed(2)} 🪙`;
-        } else {
-            resultDiv.innerHTML = "Please select an item.";
-        }
+let cart = [];
+
+document.getElementById('calculatePriceBtn').addEventListener('click', function() {
+    const item = document.getElementById('itemSelect').value;
+    const quantity = parseInt(document.getElementById('quantityInput').value);
+    const pricePerItem = itemRates[item];
+    const totalPrice = (pricePerItem * quantity).toFixed(2);
+    
+    // Show result
+    document.getElementById('result').innerText = `Price for ${quantity} ${item}(s): ${totalPrice} 🪙`;
+
+    // Add to cart button
+    const addToCartBtn = document.createElement('button');
+    addToCartBtn.innerText = 'Add to Cart';
+    addToCartBtn.onclick = () => addToCart(item, quantity, totalPrice);
+    document.getElementById('result').appendChild(addToCartBtn);
+});
+
+function addToCart(item, quantity, totalPrice) {
+    const cartItem = cart.find(cartItem => cartItem.item === item);
+    if (cartItem) {
+        cartItem.quantity += quantity;
+        cartItem.total += parseFloat(totalPrice);
+    } else {
+        cart.push({ item, quantity, total: parseFloat(totalPrice) });
+    }
+    updateCart();
+}
+
+function updateCart() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    cartItemsContainer.innerHTML = ''; // Clear previous items
+    let totalCartValue = 0;
+
+    cart.forEach(cartItem => {
+        const li = document.createElement('li');
+        li.innerText = `${cartItem.item}: ${cartItem.quantity} - Total: ${cartItem.total.toFixed(2)} 🪙`;
+        cartItemsContainer.appendChild(li);
+        totalCartValue += cartItem.total;
     });
-}); 
+
+    document.getElementById('cartTotal').innerText = `Total Cart Value: ${totalCartValue.toFixed(2)} 🪙`;
+}
+
+document.getElementById('buyBtn').addEventListener('click', function() {
+    const totalCartValue = cart.reduce((sum, cartItem) => sum + cartItem.total, 0);
+    
+    // Prepare data to send to webhook
+    const data = {
+        items: cart,
+        totalGold: totalCartValue,
+    };
+
+    // Send to webhook
+    fetch('YOUR_WEBHOOK_URL', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Purchase successful!');
+            cart = []; // Clear cart after successful purchase
+            updateCart(); // Update cart display
+        } else {
+            alert('Purchase failed!');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
