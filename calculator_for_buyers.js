@@ -64,7 +64,7 @@ document.getElementById("addToCartBtn").addEventListener("click", function() {
     }
 
     // Update cart display
-    updateCart();
+    updateCart(discordName, tradeName);
 
     // Clear input fields
     document.getElementById("quantityInput").value = 1;
@@ -73,7 +73,7 @@ document.getElementById("addToCartBtn").addEventListener("click", function() {
 });
 
 // Function to update the cart display
-function updateCart() {
+function updateCart(discordName, tradeName) {
     const cartItemsElement = document.getElementById("cartItems");
     cartItemsElement.innerHTML = ""; // Clear previous items
 
@@ -86,6 +86,19 @@ function updateCart() {
         listItem.innerText = `${item.quantity} ${item.name}: ${price} 🪙`;
         cartItemsElement.appendChild(listItem);
     });
+
+    // Add Discord and trade names to cart
+    if (discordName) {
+        const discordItem = document.createElement("li");
+        discordItem.innerText = `Discord Name: ${discordName}`;
+        cartItemsElement.appendChild(discordItem);
+    }
+
+    if (tradeName) {
+        const tradeItem = document.createElement("li");
+        tradeItem.innerText = `Trade Name: ${tradeName}`;
+        cartItemsElement.appendChild(tradeItem);
+    }
 
     document.getElementById("cartTotal").innerText = `Total: ${total.toFixed(2)} 🪙`;
 }
@@ -102,8 +115,6 @@ document.getElementById("buyBtn").addEventListener("click", function() {
         items: cart,
         total: document.getElementById("cartTotal").innerText,
     };
-
-    console.log("Data being sent to webhook:", JSON.stringify(data)); // Log the data
 
     // Send data to webhook
     fetch("https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk", {
