@@ -1,97 +1,127 @@
-const rates = {
-    "Akomeric": 810,
-    "Bloodroot": 900,
-    "Hyssop": 450,
-    "Safflower": 225,
-    "Sage Leaf": 225,
-    "WolfMint": 585,
-    "Vissinel": 630,
-    "Sunburst Flower": 22.5,
-    "Ember Fern": 22.5,
-    "Stone": 720,
-    "Copper Ore": 675,
-    "Iron Ore": 315,
-    "Gold Ore": 720,
-    "Mithril Ore": 315,
-    "Evergreen log": 360,
-    "Oak log": 360,
-    "Pine log": 360,
-    "Maple log": 360,
-    "Birch log": 360,
-    "Spruce log": 360,
-    "Fir log": 360,
-    "Ash log": 270,
-    "Willow log": 243,
-    "Eucalyptus log": 180,
-    "Elder log": 270,
-    "RedWood log": 72,
-    "Cedar log": 54,
-    "Cherry Blossom log": 36,
-    "Mahogany log": 27,
-    "Chesnut log": 22.5,
-    "Magnolia log": 14,
-    "Ginko log": 8,
-    "Feather": 405,
-    "Hide": 405,
-    "Yarn": 720
+// Define item prices based on sell rates
+const itemPrices = {
+    "Akomeric": 1 / 810,
+    "Bloodroot": 1 / 900,
+    "Hyssop": 1 / 450,
+    "Safflower": 1 / 225,
+    "Sage Leaf": 1 / 225,
+    "WolfMint": 1 / 585,
+    "Vissinel": 1 / 630,
+    "Sunburst Flower": 1 / 22.5,
+    "Ember Fern": 1 / 22.5,
+    "Stone": 1 / 720,
+    "Copper Ore": 1 / 675,
+    "Iron Ore": 1 / 315,
+    "Gold Ore": 1 / 720,
+    "Mithril Ore": 1 / 315,
+    "Evergreen log": 1 / 360,
+    "Oak log": 1 / 360,
+    "Pine log": 1 / 360,
+    "Maple log": 1 / 360,
+    "Birch log": 1 / 360,
+    "Spruce log": 1 / 360,
+    "Fir log": 1 / 360,
+    "Ash log": 1 / 270,
+    "Willow log": 1 / 243,
+    "Eucalyptus log": 1 / 180,
+    "Elder log": 1 / 270,
+    "RedWood log": 1 / 72,
+    "Cedar log": 1 / 54,
+    "Cherry Blossom log": 1 / 36,
+    "Mahogany log": 1 / 27,
+    "Chesnut log": 1 / 22.5,
+    "Magnolia log": 1 / 14,
+    "Ginko log": 1 / 8,
+    "Feather": 1 / 405,
+    "Hide": 1 / 405,
+    "Yarn": 1 / 720,
 };
 
-const cart = [];
+// Cart to hold items
+let cart = [];
 
-document.getElementById('calculatePriceBtn').addEventListener('click', () => {
-    const item = document.getElementById('itemSelect').value;
-    const quantity = parseInt(document.getElementById('quantityInput').value);
-    const rate = rates[item];
-
-    if (rate && quantity > 0) {
-        const price = quantity / rate;
-        document.getElementById('result').textContent = `Price: ${price.toFixed(2)} Gold`;
-        addToCart(item, quantity, price);
-    } else {
-        document.getElementById('result').textContent = 'Invalid selection or quantity.';
-    }
+// Calculate price button event
+document.getElementById("calculatePriceBtn").addEventListener("click", function() {
+    const selectedItem = document.getElementById("itemSelect").value;
+    const quantity = document.getElementById("quantityInput").value;
+    const price = itemPrices[selectedItem] * quantity;
+    document.getElementById("result").innerText = `Price for ${quantity} ${selectedItem}: ${price.toFixed(2)} 🪙`;
 });
 
-function addToCart(item, quantity, price) {
-    cart.push({ item, quantity, price });
-    displayCart();
-}
+// Add to cart button event
+document.getElementById("addToCartBtn").addEventListener("click", function() {
+    const selectedItem = document.getElementById("itemSelect").value;
+    const quantity = document.getElementById("quantityInput").value;
+    const discordName = document.getElementById("discordName").value;
+    const tradeName = document.getElementById("tradeName").value;
 
-function displayCart() {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    
-    cartItems.innerHTML = '';
-    let totalGold = 0;
+    // Check if item is already in cart
+    const existingItem = cart.find(item => item.name === selectedItem);
+    if (existingItem) {
+        existingItem.quantity += parseInt(quantity);
+    } else {
+        cart.push({ name: selectedItem, quantity: parseInt(quantity) });
+    }
 
-    cart.forEach(({ item, quantity, price }) => {
-        totalGold += price;
-        const li = document.createElement('li');
-        li.textContent = `${item}: ${quantity} (Price: ${price.toFixed(2)} Gold)`;
-        cartItems.appendChild(li);
+    // Update cart display
+    updateCart();
+
+    // Clear input fields
+    document.getElementById("quantityInput").value = 1;
+    document.getElementById("discordName").value = "";
+    document.getElementById("tradeName").value = "";
+});
+
+// Function to update the cart display
+function updateCart() {
+    const cartItemsElement = document.getElementById("cartItems");
+    cartItemsElement.innerHTML = ""; // Clear previous items
+
+    let total = 0;
+
+    cart.forEach(item => {
+        const price = (itemPrices[item.name] * item.quantity).toFixed(2);
+        total += parseFloat(price);
+        const listItem = document.createElement("li");
+        listItem.innerText = `${item.quantity} ${item.name}: ${price} 🪙`;
+        cartItemsElement.appendChild(listItem);
     });
 
-    cartTotal.textContent = `Total Gold: ${totalGold.toFixed(2)}`;
+    document.getElementById("cartTotal").innerText = `Total: ${total.toFixed(2)} 🪙`;
 }
 
-document.getElementById('buyBtn').addEventListener('click', async () => {
-    const webhookURL = 'https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk';
-    const cartData = cart.map(({ item, quantity, price }) => `${item}: ${quantity} (Price: ${price.toFixed(2)} Gold)`).join('\n');
-    const totalGold = cart.reduce((sum, { price }) => sum + price, 0).toFixed(2);
-
+// Buy button event
+document.getElementById("buyBtn").addEventListener("click", function() {
+    const discordName = document.getElementById("discordName").value;
+    const tradeName = document.getElementById("tradeName").value;
+    
+    // Prepare data to send to webhook
     const data = {
-        content: `Items:\n${cartData}\nTotal Gold: ${totalGold}`,
+        discordName: discordName,
+        tradeName: tradeName,
+        items: cart,
+        total: document.getElementById("cartTotal").innerText,
     };
 
-    await fetch(webhookURL, {
-        method: 'POST',
+    // Send data to webhook
+    fetch("https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Purchase successful!");
+            cart = []; // Clear cart after purchase
+            updateCart(); // Update cart display
+        } else {
+            alert("Error processing purchase.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error sending data.");
     });
-
-    // Clear cart after purchase
-    cart.length = 0;
-    displayCart(); // Refresh cart display
 });
