@@ -7,57 +7,62 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Calculator for Buyers</h1>
-        <form id="calculator-form">
-            <label for="item-select">Select an Item:</label>
-            <select id="item-select">
-                <option value="" data-price="">--Select an Item--</option>
-                <option value="Akomeric" data-price="810">Akomeric</option>
-                <option value="Bloodroot" data-price="900">Bloodroot</option>
-                <option value="Hyssop" data-price="450">Hyssop</option>
-                <option value="Safflower" data-price="225">Safflower</option>
-                <option value="Sage Leaf" data-price="225">Sage Leaf</option>
-                <option value="WolfMint" data-price="585">WolfMint</option>
-                <option value="Vissinel" data-price="630">Vissinel</option>
-                <option value="Sunburst Flower" data-price="22.5">Sunburst Flower</option>
-                <option value="Ember Fern" data-price="22.5">Ember Fern</option>
-                <option value="Stone" data-price="720">Stone</option>
-                <option value="Copper Ore" data-price="675">Copper Ore</option>
-                <option value="Iron Ore" data-price="315">Iron Ore</option>
-                <option value="Gold Ore" data-price="720">Gold Ore</option>
-                <option value="Mithril Ore" data-price="315">Mithril Ore</option>
-                <option value="Evergreen log" data-price="360">Evergreen log</option>
-                <option value="Oak log" data-price="360">Oak log</option>
-                <option value="Pine log" data-price="360">Pine log</option>
-                <option value="Maple log" data-price="360">Maple log</option>
-                <option value="Birch log" data-price="360">Birch log</option>
-                <option value="Spruce log" data-price="360">Spruce log</option>
-                <option value="Fir log" data-price="360">Fir log</option>
-                <option value="Ash log" data-price="270">Ash log</option>
-                <option value="Willow log" data-price="243">Willow log</option>
-                <option value="Eucalyptus log" data-price="180">Eucalyptus log</option>
-                <option value="Elder log" data-price="270">Elder log</option>
-                <option value="RedWood log" data-price="72">RedWood log</option>
-                <option value="Cedar log" data-price="54">Cedar log</option>
-                <option value="Cherry Blossom log" data-price="36">Cherry Blossom log</option>
-                <option value="Mahogany log" data-price="27">Mahogany log</option>
-                <option value="Chesnut log" data-price="22.5">Chesnut log</option>
-                <option value="Magnolia log" data-price="14">Magnolia log</option>
-                <option value="Ginko log" data-price="8">Ginko log</option>
-                <option value="Feather" data-price="405">Feather</option>
-                <option value="Hide" data-price="405">Hide</option>
-                <option value="Yarn" data-price="720">Yarn</option>
-            </select>
+    <h1>Calculator for Buyers</h1>
+    <div id="calculator">
+        <label for="itemSelect">Select Item:</label>
+        <select id="itemSelect">
+            <option value="Akomeric">Akomeric</option>
+            <option value="Bloodroot">Bloodroot</option>
+            <option value="Hyssop">Hyssop</option>
+            <option value="Safflower">Safflower</option>
+            <option value="Sage Leaf">Sage Leaf</option>
+            <option value="WolfMint">WolfMint</option>
+            <option value="Vissinel">Vissinel</option>
+            <option value="Sunburst Flower">Sunburst Flower</option>
+            <option value="Ember Fern">Ember Fern</option>
+            <option value="Stone">Stone</option>
+            <option value="Copper Ore">Copper Ore</option>
+            <option value="Iron Ore">Iron Ore</option>
+            <option value="Gold Ore">Gold Ore</option>
+            <option value="Mithril Ore">Mithril Ore</option>
+            <option value="Evergreen log">Evergreen log</option>
+            <option value="Oak log">Oak log</option>
+            <option value="Pine log">Pine log</option>
+            <option value="Maple log">Maple log</option>
+            <option value="Birch log">Birch log</option>
+            <option value="Spruce log">Spruce log</option>
+            <option value="Fir log">Fir log</option>
+            <option value="Ash log">Ash log</option>
+            <option value="Willow log">Willow log</option>
+            <option value="Eucalyptus log">Eucalyptus log</option>
+            <option value="Elder log">Elder log</option>
+            <option value="RedWood log">RedWood log</option>
+            <option value="Cedar log">Cedar log</option>
+            <option value="Cherry Blossom log">Cherry Blossom log</option>
+            <option value="Mahogany log">Mahogany log</option>
+            <option value="Chesnut log">Chesnut log</option>
+            <option value="Magnolia log">Magnolia log</option>
+            <option value="Ginko log">Ginko log</option>
+            <option value="Feather">Feather</option>
+            <option value="Hide">Hide</option>
+            <option value="Yarn">Yarn</option>
+        </select>
 
-            <label for="quantity">Enter Quantity:</label>
-            <input type="number" id="quantity" min="1" required>
+        <label for="quantityInput">Quantity:</label>
+        <input type="number" id="quantityInput" min="1" value="1">
 
-            <button type="submit">Calculate Price</button>
-        </form>
+        <button id="calculatePriceBtn">Calculate Price</button>
+
         <div id="result"></div>
+        
+        <!-- Cart Section -->
+        <div id="cart">
+            <h2>Cart</h2>
+            <ul id="cartItems"></ul>
+            <p id="cartTotal"></p>
+            <button id="buyBtn">Buy</button>
+        </div>
     </div>
-
     <script src="calculator_for_buyers.js"></script>
 </body>
 </html> 
