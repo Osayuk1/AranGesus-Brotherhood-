@@ -41,6 +41,7 @@
             color: #1e3c72;
         }
     </style>
+    <script src="calculator_for_buyers.js" defer></script>
 </head>
 <body>
 
@@ -96,24 +97,5 @@
         <a href="index.html" class="button">Back to Home</a>
     </div>
 
-    <script>
-        const form = document.getElementById('calculator-form');
-        const resultDiv = document.getElementById('result');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const selectedItem = form.item-select.value;
-            const quantity = parseInt(form.quantity.value);
-            const akomericPrice = parseFloat(form.item-select.options[form.item-select.selectedIndex].dataset.price);
-
-            // Calculate total price in gold
-            const totalPriceGold = (quantity / akomericPrice).toFixed(2);
-
-            // Display the result
-            resultDiv.innerHTML = `Total Price for ${quantity} ${selectedItem} is: 🪙 ${totalPriceGold}`;
-        });
-    </script>
-
 </body>
-</html> 
+</html>
