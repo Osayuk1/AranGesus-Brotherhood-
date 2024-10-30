@@ -3,215 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price List</title>
+    <title>Calculator for Buyers - The AranGesus Brotherhood</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            text-align: center;
+            background-color: #f5f5f5;
             color: #333;
             margin: 0;
-            padding: 20px;
         }
-        h1 {
-            color: #ff0000;
-            text-align: center;
+        .container {
+            padding: 50px;
         }
-        h2 {
-            border-bottom: 2px solid #ff0000;
-            padding-bottom: 10px;
+        .button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #1e3c72;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: #fff;
+        .button:hover {
+            background-color: #16355a;
         }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
+        select, input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
         }
-        th {
-            background-color: #ff0000;
-            color: white;
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #1e3c72;
         }
     </style>
 </head>
 <body>
 
-    <h1>Price List</h1>
+    <div class="container">
+        <h1>Calculator for Buyers</h1>
+        <p>Select the items you want to buy:</p>
 
-    <h2>🌿 HERBS 🌿</h2>
-    <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Sell Rate</th>
-        </tr>
-        <tr>
-            <td>Akomeric</td>
-            <td>810 🪙</td>
-        </tr>
-        <tr>
-            <td>Bloodroot</td>
-            <td>900 🪙</td>
-        </tr>
-        <tr>
-            <td>Hyssop</td>
-            <td>450 🪙</td>
-        </tr>
-        <tr>
-            <td>Safflower</td>
-            <td>225 🪙</td>
-        </tr>
-        <tr>
-            <td>Sage Leaf</td>
-            <td>225 🪙</td>
-        </tr>
-        <tr>
-            <td>WolfMint</td>
-            <td>585 🪙</td>
-        </tr>
-        <tr>
-            <td>Vissinel</td>
-            <td>630 🪙</td>
-        </tr>
-        <tr>
-            <td>Sunburst Flower</td>
-            <td>22.5 🪙</td>
-        </tr>
-        <tr>
-            <td>Ember Fern</td>
-            <td>22.5 🪙</td>
-        </tr>
-    </table>
+        <form id="calculator-form">
+            <select id="item-select" required>
+                <option value="" disabled selected>Select an item</option>
+                <option value="akomeric" data-price="0.00123">Akomeric 🪙</option>
+                <option value="bloodroot" data-price="0.00111">Bloodroot 🪙</option>
+                <option value="hyssop" data-price="0.00122">Hyssop 🪙</option>
+                <option value="safflower" data-price="0.00364">Safflower 🪙</option>
+                <option value="sageleaf" data-price="0.00364">Sage Leaf 🪙</option>
+                <option value="wolfmint" data-price="0.00139">WolfMint 🪙</option>
+                <option value="vissinel" data-price="0.00126">Vissinel 🪙</option>
+                <option value="sunburstflower" data-price="0.03703">Sunburst Flower 🪙</option>
+                <option value="emberfern" data-price="0.03703">Ember Fern 🪙</option>
+                <option value="stone" data-price="0.00114">Stone 🪙</option>
+                <option value="copperore" data-price="0.00121">Copper Ore 🪙</option>
+                <option value="ironore" data-price="0.00260">Iron Ore 🪙</option>
+                <option value="goldore" data-price="0.00114">Gold Ore 🪙</option>
+                <option value="mithrilore" data-price="0.00260">Mithril Ore 🪙</option>
+                <option value="evergreenlog" data-price="0.00227">Evergreen log 🪙</option>
+                <option value="oaklog" data-price="0.00227">Oak log 🪙</option>
+                <option value="pinelog" data-price="0.00227">Pine log 🪙</option>
+                <option value="maplelog" data-price="0.00227">Maple log 🪙</option>
+                <option value="birchlog" data-price="0.00227">Birch log 🪙</option>
+                <option value="sprucelog" data-price="0.00227">Spruce log 🪙</option>
+                <option value="firlog" data-price="0.00227">Fir log 🪙</option>
+                <option value="ashlog" data-price="0.00330">Ash log 🪙</option>
+                <option value="willowlog" data-price="0.00364">Willow log 🪙</option>
+                <option value="eucalyptuslog" data-price="0.00455">Eucalyptus log 🪙</option>
+                <option value="elderlog" data-price="0.00330">Elder log 🪙</option>
+                <option value="redwoodlog" data-price="0.01136">RedWood log 🪙</option>
+                <option value="cedarlog" data-price="0.01515">Cedar log 🪙</option>
+                <option value="cherryblossomlog" data-price="0.02273">Cherry Blossom log 🪙</option>
+                <option value="mahoganylog" data-price="0.03030">Mahogany log 🪙</option>
+                <option value="chestnutlog" data-price="0.03703">Chesnut log 🪙</option>
+                <option value="magnolialog" data-price="0.05556">Magnolia log 🪙</option>
+                <option value="ginkgolog" data-price="0.08333">Ginko log 🪙</option>
+                <option value="feather" data-price="0.00202">Feather 🪙</option>
+                <option value="hide" data-price="0.00202">Hide 🪙</option>
+                <option value="yarn" data-price="0.00114">Yarn 🪙</option>
+            </select>
+            <input type="number" id="quantity" placeholder="Quantity" min="1" required>
+            <button type="submit" class="button">Calculate Price</button>
+        </form>
 
-    <h2>⚒️ ORES ⚒️</h2>
-    <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Sell Rate</th>
-        </tr>
-        <tr>
-            <td>Stone</td>
-            <td>720 🪙</td>
-        </tr>
-        <tr>
-            <td>Copper Ore</td>
-            <td>675 🪙</td>
-        </tr>
-        <tr>
-            <td>Iron Ore</td>
-            <td>315 🪙</td>
-        </tr>
-        <tr>
-            <td>Gold Ore</td>
-            <td>720 🪙</td>
-        </tr>
-        <tr>
-            <td>Mithril Ore</td>
-            <td>315 🪙</td>
-        </tr>
-    </table>
+        <div id="result"></div>
 
-    <h2>🌲 LOGS 🌲</h2>
-    <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Sell Rate</th>
-        </tr>
-        <tr>
-            <td>Evergreen log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Oak log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Pine log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Maple log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Birch log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Spruce log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Fir log</td>
-            <td>360 🪙</td>
-        </tr>
-        <tr>
-            <td>Ash log</td>
-            <td>270 🪙</td>
-        </tr>
-        <tr>
-            <td>Willow log</td>
-            <td>243 🪙</td>
-        </tr>
-        <tr>
-            <td>Eucalyptus log</td>
-            <td>180 🪙</td>
-        </tr>
-        <tr>
-            <td>Elder log</td>
-            <td>270 🪙</td>
-        </tr>
-        <tr>
-            <td>RedWood log</td>
-            <td>72 🪙</td>
-        </tr>
-        <tr>
-            <td>Cedar log</td>
-            <td>54 🪙</td>
-        </tr>
-        <tr>
-            <td>Cherry Blossom log</td>
-            <td>36 🪙</td>
-        </tr>
-        <tr>
-            <td>Mahogany log</td>
-            <td>27 🪙</td>
-        </tr>
-        <tr>
-            <td>Chesnut log</td>
-            <td>22.5 🪙</td>
-        </tr>
-        <tr>
-            <td>Magnolia log</td>
-            <td>14 🪙</td>
-        </tr>
-        <tr>
-            <td>Ginko log</td>
-            <td>8 🪙</td>
-        </tr>
-    </table>
+        <a href="index.html" class="button">Back to Home</a>
+    </div>
 
-    <h2>OTHER ITEMS</h2>
-    <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Sell Rate</th>
-        </tr>
-        <tr>
-            <td>Feather</td>
-            <td>405 🪙</td>
-        </tr>
-        <tr>
-            <td>Hide</td>
-            <td>405 🪙</td>
-        </tr>
-        <tr>
-            <td>Yarn</td>
-            <td>720 🪙</td>
-        </tr>
-    </table>
+    <script>
+        const form = document.getElementById('calculator-form');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const selectedItem = form.item-select.value;
+            const quantity = parseInt(form.quantity.value);
+            const pricePerItem = parseFloat(form.item-select.options[form.item-select.selectedIndex].dataset.price);
+            
+            // Calculate total price in coins
+            const totalPrice = (pricePerItem * quantity).toFixed(2);
+
+            // Display the result
+            resultDiv.innerHTML = `Total Price for ${quantity} ${selectedItem} is: 🪙 ${totalPrice}`;
+        });
+    </script>
 
 </body>
 </html>
