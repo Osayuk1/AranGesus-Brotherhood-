@@ -41,17 +41,21 @@ let cart = [];
 document.getElementById('calculatePriceBtn').addEventListener('click', function() {
     const item = document.getElementById('itemSelect').value;
     const quantity = parseInt(document.getElementById('quantityInput').value);
+    
+    // Check if quantity is valid
+    if (quantity < 1) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+    
     const pricePerItem = itemRates[item];
     const totalPrice = (pricePerItem * quantity).toFixed(2);
     
     // Show result
-    document.getElementById('result').innerText = `Price for ${quantity} ${item}(s): ${totalPrice} 🪙`;
-
-    // Add to cart button
-    const addToCartBtn = document.createElement('button');
-    addToCartBtn.innerText = 'Add to Cart';
-    addToCartBtn.onclick = () => addToCart(item, quantity, totalPrice);
-    document.getElementById('result').appendChild(addToCartBtn);
+    document.getElementById('result').innerHTML = `
+        Price for ${quantity} ${item}(s): ${totalPrice} 🪙
+        <button onclick="addToCart('${item}', ${quantity}, ${totalPrice})">Add to Cart</button>
+    `;
 });
 
 function addToCart(item, quantity, totalPrice) {
@@ -107,4 +111,4 @@ document.getElementById('buyBtn').addEventListener('click', function() {
         }
     })
     .catch(error => console.error('Error:', error));
-});
+}); 
