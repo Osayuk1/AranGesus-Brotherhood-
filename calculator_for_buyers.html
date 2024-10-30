@@ -11,33 +11,14 @@
             background-color: #f5f5f5;
             color: #333;
             margin: 0;
-            padding: 20px;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin: 15px 0 5px;
-        }
-        select, input[type="number"] {
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 50px;
         }
         .button {
             display: inline-block;
-            padding: 10px 20px;
+            margin: 15px;
+            padding: 15px 25px;
             font-size: 18px;
             color: #fff;
             background-color: #1e3c72;
@@ -49,10 +30,16 @@
         .button:hover {
             background-color: #16355a;
         }
+        select, input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 200px;
+        }
         .result {
+            font-size: 24px;
             margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
+            color: #1e3c72;
         }
     </style>
 </head>
@@ -60,104 +47,72 @@
 
     <div class="container">
         <h1>Calculator for Buyers</h1>
-        <form id="calculatorForm">
-            <label for="itemSelect">Select an item:</label>
-            <select id="itemSelect" required>
-                <option value="" disabled selected>Select an item</option>
-                <option value="Akomeric">Akomeric (810 🪙)</option>
-                <option value="Bloodroot">Bloodroot (900 🪙)</option>
-                <option value="Hyssop">Hyssop (450 🪙)</option>
-                <option value="Safflower">Safflower (225 🪙)</option>
-                <option value="Sage Leaf">Sage Leaf (225 🪙)</option>
-                <option value="WolfMint">WolfMint (585 🪙)</option>
-                <option value="Vissinel">Vissinel (630 🪙)</option>
-                <option value="Sunburst Flower">Sunburst Flower (22.5 🪙)</option>
-                <option value="Ember Fern">Ember Fern (22.5 🪙)</option>
-                <option value="Stone">Stone (720 🪙)</option>
-                <option value="Copper Ore">Copper Ore (675 🪙)</option>
-                <option value="Iron Ore">Iron Ore (315 🪙)</option>
-                <option value="Gold Ore">Gold Ore (720 🪙)</option>
-                <option value="Mithril Ore">Mithril Ore (315 🪙)</option>
-                <option value="Evergreen log">Evergreen log (360 🪙)</option>
-                <option value="Oak log">Oak log (360 🪙)</option>
-                <option value="Pine log">Pine log (360 🪙)</option>
-                <option value="Maple log">Maple log (360 🪙)</option>
-                <option value="Birch log">Birch log (360 🪙)</option>
-                <option value="Spruce log">Spruce log (360 🪙)</option>
-                <option value="Fir log">Fir log (360 🪙)</option>
-                <option value="Ash log">Ash log (270 🪙)</option>
-                <option value="Willow log">Willow log (243 🪙)</option>
-                <option value="Eucalyptus log">Eucalyptus log (180 🪙)</option>
-                <option value="Elder log">Elder log (270 🪙)</option>
-                <option value="RedWood log">RedWood log (72 🪙)</option>
-                <option value="Cedar log">Cedar log (54 🪙)</option>
-                <option value="Cherry Blossom log">Cherry Blossom log (36 🪙)</option>
-                <option value="Mahogany log">Mahogany log (27 🪙)</option>
-                <option value="Chesnut log">Chesnut log (22.5 🪙)</option>
-                <option value="Magnolia log">Magnolia log (14 🪙)</option>
-                <option value="Ginko log">Ginko log (8 🪙)</option>
-                <option value="Feather">Feather (405 🪙)</option>
-                <option value="Hide">Hide (405 🪙)</option>
-                <option value="Yarn">Yarn (720 🪙)</option>
+        <p>Select the items you want to buy:</p>
+        <div>
+            <label for="item">Select Item:</label>
+            <select id="item">
+                <option value="akomeric">Akomeric (810🪙 for 1)</option>
+                <option value="bloodroot">Bloodroot (900🪙 for 1)</option>
+                <option value="hyssop">Hyssop (450🪙 for 1)</option>
+                <option value="safflower">Safflower (225🪙 for 1)</option>
+                <option value="sageleaf">Sage Leaf (225🪙 for 1)</option>
+                <option value="wolfmint">WolfMint (585🪙 for 1)</option>
+                <option value="vissinel">Vissinel (630🪙 for 1)</option>
+                <option value="sunburstflower">Sunburst Flower (22.5🪙 for 1)</option>
+                <option value="emberfern">Ember Fern (22.5🪙 for 1)</option>
+                <!-- Add more items as needed -->
             </select>
-            
-            <label for="quantityInput">Quantity:</label>
-            <input type="number" id="quantityInput" min="1" required>
-
-            <button type="submit" class="button">Calculate Price</button>
-        </form>
-
-        <div class="result" id="result"></div>
+            <br>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" value="1">
+            <br>
+            <button class="button" onclick="calculatePrice()">Calculate Price</button>
+            <div id="result" class="result"></div>
+        </div>
     </div>
 
     <script>
-        const prices = {
-            Akomeric: 810,
-            Bloodroot: 900,
-            Hyssop: 450,
-            Safflower: 225,
-            SageLeaf: 225,
-            WolfMint: 585,
-            Vissinel: 630,
-            SunburstFlower: 22.5,
-            EmberFern: 22.5,
-            Stone: 720,
-            CopperOre: 675,
-            IronOre: 315,
-            GoldOre: 720,
-            MithrilOre: 315,
-            EvergreenLog: 360,
-            OakLog: 360,
-            PineLog: 360,
-            MapleLog: 360,
-            BirchLog: 360,
-            SpruceLog: 360,
-            FirLog: 360,
-            AshLog: 270,
-            WillowLog: 243,
-            EucalyptusLog: 180,
-            ElderLog: 270,
-            RedWoodLog: 72,
-            CedarLog: 54,
-            CherryBlossomLog: 36,
-            MahoganyLog: 27,
-            ChesnutLog: 22.5,
-            MagnoliaLog: 14,
-            GinkoLog: 8,
-            Feather: 405,
-            Hide: 405,
-            Yarn: 720
-        };
+        function calculatePrice() {
+            const item = document.getElementById("item").value;
+            const quantity = document.getElementById("quantity").value;
+            let pricePerItem;
 
-        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+            // Set price per item based on selection
+            switch (item) {
+                case "akomeric":
+                    pricePerItem = 810;
+                    break;
+                case "bloodroot":
+                    pricePerItem = 900;
+                    break;
+                case "hyssop":
+                    pricePerItem = 450;
+                    break;
+                case "safflower":
+                    pricePerItem = 225;
+                    break;
+                case "sageleaf":
+                    pricePerItem = 225;
+                    break;
+                case "wolfmint":
+                    pricePerItem = 585;
+                    break;
+                case "vissinel":
+                    pricePerItem = 630;
+                    break;
+                case "sunburstflower":
+                    pricePerItem = 22.5;
+                    break;
+                case "emberfern":
+                    pricePerItem = 22.5;
+                    break;
+                // Add more cases for other items as needed
+            }
 
-            const item = document.getElementById('itemSelect').value;
-            const quantity = parseInt(document.getElementById('quantityInput').value);
-            const totalPrice = prices[item] * quantity;
-
-            document.getElementById('result').innerText = `Total Price: ${totalPrice} 🪙`;
-        });
+            const totalPrice = (pricePerItem * quantity) / 1; // No need for conversion here
+            document.getElementById("result").innerText = `Total Price: ${totalPrice.toFixed(2)}🪙`;
+        }
     </script>
+
 </body>
 </html>
