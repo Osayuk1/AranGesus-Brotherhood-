@@ -3,99 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator for Buyers - The AranGesus Brotherhood</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f5f5f5;
-            color: #333;
-            margin: 0;
-        }
-        .container {
-            padding: 50px;
-        }
-        .button {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px 25px;
-            font-size: 18px;
-            color: #fff;
-            background-color: #1e3c72;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #16355a;
-        }
-        select, input[type="number"] {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 24px;
-            color: #1e3c72;
-        }
-    </style>
-    <script src="calculator_for_buyers.js" defer></script>
+    <title>Calculator for Buyers</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="container">
         <h1>Calculator for Buyers</h1>
-        <p>Select the items you want to buy:</p>
-
         <form id="calculator-form">
-            <select id="item-select" required>
-                <option value="" disabled selected>Select an item</option>
-                <option value="Akomeric" data-price="810">Akomeric: 810:1 🪙</option>
-                <option value="Bloodroot" data-price="900">Bloodroot: 900:1 🪙</option>
-                <option value="Hyssop" data-price="450">Hyssop: 450:1 🪙</option>
-                <option value="Safflower" data-price="225">Safflower: 225:1 🪙</option>
-                <option value="Sage Leaf" data-price="225">Sage Leaf: 225:1 🪙</option>
-                <option value="WolfMint" data-price="585">WolfMint: 585:1 🪙</option>
-                <option value="Vissinel" data-price="630">Vissinel: 630:1 🪙</option>
-                <option value="Sunburst Flower" data-price="22.5">Sunburst Flower: 22.5:1 🪙</option>
-                <option value="Ember Fern" data-price="22.5">Ember Fern: 22.5:1 🪙</option>
-                <option value="Stone" data-price="720">Stone: 720:1 🪙</option>
-                <option value="Copper Ore" data-price="675">Copper Ore: 675:1 🪙</option>
-                <option value="Iron Ore" data-price="315">Iron Ore: 315:1 🪙</option>
-                <option value="Gold Ore" data-price="720">Gold Ore: 720:1 🪙</option>
-                <option value="Mithril Ore" data-price="315">Mithril Ore: 315:1 🪙</option>
-                <option value="Evergreen log" data-price="360">Evergreen log: 360:1 🪙</option>
-                <option value="Oak log" data-price="360">Oak log: 360:1 🪙</option>
-                <option value="Pine log" data-price="360">Pine log: 360:1 🪙</option>
-                <option value="Maple log" data-price="360">Maple log: 360:1 🪙</option>
-                <option value="Birch log" data-price="360">Birch log: 360:1 🪙</option>
-                <option value="Spruce log" data-price="360">Spruce log: 360:1 🪙</option>
-                <option value="Fir log" data-price="360">Fir log: 360:1 🪙</option>
-                <option value="Ash log" data-price="270">Ash log: 270:1 🪙</option>
-                <option value="Willow log" data-price="243">Willow log: 243:1 🪙</option>
-                <option value="Eucalyptus log" data-price="180">Eucalyptus log: 180:1 🪙</option>
-                <option value="Elder log" data-price="270">Elder log: 270:1 🪙</option>
-                <option value="RedWood log" data-price="72">RedWood log: 72:1 🪙</option>
-                <option value="Cedar log" data-price="54">Cedar log: 54:1 🪙</option>
-                <option value="Cherry Blossom log" data-price="36">Cherry Blossom log: 36:1 🪙</option>
-                <option value="Mahogany log" data-price="27">Mahogany log: 27:1 🪙</option>
-                <option value="Chesnut log" data-price="22.5">Chesnut log: 22.5:1 🪙</option>
-                <option value="Magnolia log" data-price="14">Magnolia log: 14:1 🪙</option>
-                <option value="Ginko log" data-price="8">Ginko log: 8:1 🪙</option>
-                <option value="Feather" data-price="405">Feather: 405:1 🪙</option>
-                <option value="Hide" data-price="405">Hide: 405:1 🪙</option>
-                <option value="Yarn" data-price="720">Yarn: 720:1 🪙</option>
+            <label for="item-select">Select an Item:</label>
+            <select id="item-select">
+                <option value="" data-price="">--Select an Item--</option>
+                <option value="Akomeric" data-price="810">Akomeric</option>
+                <option value="Bloodroot" data-price="900">Bloodroot</option>
+                <option value="Hyssop" data-price="450">Hyssop</option>
+                <option value="Safflower" data-price="225">Safflower</option>
+                <option value="Sage Leaf" data-price="225">Sage Leaf</option>
+                <option value="WolfMint" data-price="585">WolfMint</option>
+                <option value="Vissinel" data-price="630">Vissinel</option>
+                <option value="Sunburst Flower" data-price="22.5">Sunburst Flower</option>
+                <option value="Ember Fern" data-price="22.5">Ember Fern</option>
+                <option value="Stone" data-price="720">Stone</option>
+                <option value="Copper Ore" data-price="675">Copper Ore</option>
+                <option value="Iron Ore" data-price="315">Iron Ore</option>
+                <option value="Gold Ore" data-price="720">Gold Ore</option>
+                <option value="Mithril Ore" data-price="315">Mithril Ore</option>
+                <option value="Evergreen log" data-price="360">Evergreen log</option>
+                <option value="Oak log" data-price="360">Oak log</option>
+                <option value="Pine log" data-price="360">Pine log</option>
+                <option value="Maple log" data-price="360">Maple log</option>
+                <option value="Birch log" data-price="360">Birch log</option>
+                <option value="Spruce log" data-price="360">Spruce log</option>
+                <option value="Fir log" data-price="360">Fir log</option>
+                <option value="Ash log" data-price="270">Ash log</option>
+                <option value="Willow log" data-price="243">Willow log</option>
+                <option value="Eucalyptus log" data-price="180">Eucalyptus log</option>
+                <option value="Elder log" data-price="270">Elder log</option>
+                <option value="RedWood log" data-price="72">RedWood log</option>
+                <option value="Cedar log" data-price="54">Cedar log</option>
+                <option value="Cherry Blossom log" data-price="36">Cherry Blossom log</option>
+                <option value="Mahogany log" data-price="27">Mahogany log</option>
+                <option value="Chesnut log" data-price="22.5">Chesnut log</option>
+                <option value="Magnolia log" data-price="14">Magnolia log</option>
+                <option value="Ginko log" data-price="8">Ginko log</option>
+                <option value="Feather" data-price="405">Feather</option>
+                <option value="Hide" data-price="405">Hide</option>
+                <option value="Yarn" data-price="720">Yarn</option>
             </select>
-            <input type="number" id="quantity" placeholder="Quantity" min="1" required>
-            <button type="submit" class="button">Calculate Price</button>
+
+            <label for="quantity">Enter Quantity:</label>
+            <input type="number" id="quantity" min="1" required>
+
+            <button type="submit">Calculate Price</button>
         </form>
-
         <div id="result"></div>
-
-        <a href="index.html" class="button">Back to Home</a>
     </div>
 
+    <script src="calculator_for_buyers.js"></script>
 </body>
-</html>
+</html> 
