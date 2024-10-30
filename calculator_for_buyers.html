@@ -80,7 +80,7 @@
             // Set price per item based on selection
             switch (item) {
                 case "akomeric":
-                    pricePerItem = 810;
+                    pricePerItem = 810; // 1 gold = 810 akomeric
                     break;
                 case "bloodroot":
                     pricePerItem = 900;
@@ -109,10 +109,11 @@
                 // Add more cases for other items as needed
             }
 
-            const totalPrice = (pricePerItem * quantity) / 1; // No need for conversion here
-            document.getElementById("result").innerText = `Total Price: ${totalPrice.toFixed(2)}🪙`;
+            // Calculate total price in gold
+            const totalPrice = (quantity / pricePerItem).toFixed(4); // Adjust precision as needed
+            document.getElementById("result").innerText = `Total Price: ${totalPrice} gold`;
         }
     </script>
 
 </body>
-</html>
+</html> 
