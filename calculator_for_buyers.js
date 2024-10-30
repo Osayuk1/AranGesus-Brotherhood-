@@ -94,7 +94,7 @@ function updateCart() {
 document.getElementById("buyBtn").addEventListener("click", function() {
     const discordName = document.getElementById("discordName").value;
     const tradeName = document.getElementById("tradeName").value;
-    
+
     // Prepare data to send to webhook
     const data = {
         discordName: discordName,
@@ -102,6 +102,8 @@ document.getElementById("buyBtn").addEventListener("click", function() {
         items: cart,
         total: document.getElementById("cartTotal").innerText,
     };
+
+    console.log("Data being sent to webhook:", JSON.stringify(data)); // Log the data
 
     // Send data to webhook
     fetch("https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk", {
@@ -117,11 +119,14 @@ document.getElementById("buyBtn").addEventListener("click", function() {
             cart = []; // Clear cart after purchase
             updateCart(); // Update cart display
         } else {
-            alert("Error processing purchase.");
+            return response.text().then(text => {
+                console.error("Error response:", text);
+                alert("Error processing purchase: " + text);
+            });
         }
     })
     .catch(error => {
         console.error("Error:", error);
         alert("Error sending data.");
     });
-});
+}); 
