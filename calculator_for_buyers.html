@@ -3,185 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator for Buyers - The AranGesus Brotherhood</title>
+    <title>Price List</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f5f5f5;
+            background-color: #f0f0f0;
             color: #333;
             margin: 0;
+            padding: 20px;
         }
-        .container {
-            padding: 50px;
+        h1 {
+            color: #ff0000;
+            text-align: center;
         }
-        .button {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px 25px;
-            font-size: 18px;
-            color: #fff;
-            background-color: #1e3c72;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
+        h2 {
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 10px;
         }
-        .button:hover {
-            background-color: #16355a;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
         }
-        select, input[type="number"] {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px 0;
-            width: 200px;
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
         }
-        .result {
-            font-size: 24px;
-            margin-top: 20px;
-            color: #1e3c72;
+        th {
+            background-color: #ff0000;
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Calculator for Buyers</h1>
-        <p>Select the items you want to buy:</p>
-        <div>
-            <label for="item">Select Item:</label>
-            <select id="item">
-                <option value="akomeric">Akomeric (810🪙 for 1)</option>
-                <option value="bloodroot">Bloodroot (900🪙 for 1)</option>
-                <option value="hyssop">Hyssop (450🪙 for 1)</option>
-                <option value="safflower">Safflower (225🪙 for 1)</option>
-                <option value="sageleaf">Sage Leaf (225🪙 for 1)</option>
-                <option value="wolfmint">WolfMint (585🪙 for 1)</option>
-                <option value="vissinel">Vissinel (630🪙 for 1)</option>
-                <option value="sunburstflower">Sunburst Flower (22.5🪙 for 1)</option>
-                <option value="emberfern">Ember Fern (22.5🪙 for 1)</option>
-                <option value="ironwood">Ironwood (450🪙 for 1)</option>
-                <option value="stonepetal">Stonepetal (360🪙 for 1)</option>
-                <option value="whiteshade">White Shade (270🪙 for 1)</option>
-                <option value="blackthorn">Blackthorn (300🪙 for 1)</option>
-                <option value="blacklocust">Black Locust (810🪙 for 1)</option>
-                <option value="mysticrose">Mystic Rose (270🪙 for 1)</option>
-                <option value="nightshade">Nightshade (450🪙 for 1)</option>
-                <option value="honeydew">Honeydew (270🪙 for 1)</option>
-                <option value="goldencorn">Golden Corn (810🪙 for 1)</option>
-                <option value="moonfruit">Moonfruit (900🪙 for 1)</option>
-                <option value="firethorn">Firethorn (585🪙 for 1)</option>
-                <option value="shadowfern">Shadow Fern (450🪙 for 1)</option>
-                <option value="platinumpetal">Platinum Petal (225🪙 for 1)</option>
-                <option value="frostleaf">Frost Leaf (450🪙 for 1)</option>
-                <option value="stormflower">Stormflower (630🪙 for 1)</option>
-                <option value="crimsonleaf">Crimson Leaf (900🪙 for 1)</option>
-                <option value="silverbloom">Silver Bloom (900🪙 for 1)</option>
-                <!-- Add more items as needed -->
-            </select>
-            <br>
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" min="1" value="1">
-            <br>
-            <button class="button" onclick="calculatePrice()">Calculate Price</button>
-            <div id="result" class="result"></div>
-        </div>
-    </div>
+    <h1>Price List</h1>
 
-    <script>
-        function calculatePrice() {
-            const item = document.getElementById("item").value;
-            const quantity = document.getElementById("quantity").value;
-            let pricePerItem;
+    <h2>🌿 HERBS 🌿</h2>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Sell Rate</th>
+        </tr>
+        <tr>
+            <td>Akomeric</td>
+            <td>810 🪙</td>
+        </tr>
+        <tr>
+            <td>Bloodroot</td>
+            <td>900 🪙</td>
+        </tr>
+        <tr>
+            <td>Hyssop</td>
+            <td>450 🪙</td>
+        </tr>
+        <tr>
+            <td>Safflower</td>
+            <td>225 🪙</td>
+        </tr>
+        <tr>
+            <td>Sage Leaf</td>
+            <td>225 🪙</td>
+        </tr>
+        <tr>
+            <td>WolfMint</td>
+            <td>585 🪙</td>
+        </tr>
+        <tr>
+            <td>Vissinel</td>
+            <td>630 🪙</td>
+        </tr>
+        <tr>
+            <td>Sunburst Flower</td>
+            <td>22.5 🪙</td>
+        </tr>
+        <tr>
+            <td>Ember Fern</td>
+            <td>22.5 🪙</td>
+        </tr>
+    </table>
 
-            // Set price per item based on selection
-            switch (item) {
-                case "akomeric":
-                    pricePerItem = 810; // 1 gold = 810 akomeric
-                    break;
-                case "bloodroot":
-                    pricePerItem = 900;
-                    break;
-                case "hyssop":
-                    pricePerItem = 450;
-                    break;
-                case "safflower":
-                    pricePerItem = 225;
-                    break;
-                case "sageleaf":
-                    pricePerItem = 225;
-                    break;
-                case "wolfmint":
-                    pricePerItem = 585;
-                    break;
-                case "vissinel":
-                    pricePerItem = 630;
-                    break;
-                case "sunburstflower":
-                    pricePerItem = 22.5;
-                    break;
-                case "emberfern":
-                    pricePerItem = 22.5;
-                    break;
-                case "ironwood":
-                    pricePerItem = 450;
-                    break;
-                case "stonepetal":
-                    pricePerItem = 360;
-                    break;
-                case "whiteshade":
-                    pricePerItem = 270;
-                    break;
-                case "blackthorn":
-                    pricePerItem = 300;
-                    break;
-                case "blacklocust":
-                    pricePerItem = 810;
-                    break;
-                case "mysticrose":
-                    pricePerItem = 270;
-                    break;
-                case "nightshade":
-                    pricePerItem = 450;
-                    break;
-                case "honeydew":
-                    pricePerItem = 270;
-                    break;
-                case "goldencorn":
-                    pricePerItem = 810;
-                    break;
-                case "moonfruit":
-                    pricePerItem = 900;
-                    break;
-                case "firethorn":
-                    pricePerItem = 585;
-                    break;
-                case "shadowfern":
-                    pricePerItem = 450;
-                    break;
-                case "platinumpetal":
-                    pricePerItem = 225;
-                    break;
-                case "frostleaf":
-                    pricePerItem = 450;
-                    break;
-                case "stormflower":
-                    pricePerItem = 630;
-                    break;
-                case "crimsonleaf":
-                    pricePerItem = 900;
-                    break;
-                case "silverbloom":
-                    pricePerItem = 900;
-                    break;
-                // Add more cases for other items as needed
-            }
+    <h2>⚒️ ORES ⚒️</h2>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Sell Rate</th>
+        </tr>
+        <tr>
+            <td>Stone</td>
+            <td>720 🪙</td>
+        </tr>
+        <tr>
+            <td>Copper Ore</td>
+            <td>675 🪙</td>
+        </tr>
+        <tr>
+            <td>Iron Ore</td>
+            <td>315 🪙</td>
+        </tr>
+        <tr>
+            <td>Gold Ore</td>
+            <td>720 🪙</td>
+        </tr>
+        <tr>
+            <td>Mithril Ore</td>
+            <td>315 🪙</td>
+        </tr>
+    </table>
 
-            // Calculate total price in gold
-            const totalPrice = (quantity / pricePerItem).toFixed(4); // Adjust precision as needed
-            document.getElementById("result").innerText = `Total Price: ${totalPrice} gold`;
-        }
-    </script>
+    <h2>🌲 LOGS 🌲</h2>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Sell Rate</th>
+        </tr>
+        <tr>
+            <td>Evergreen log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Oak log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Pine log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Maple log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Birch log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Spruce log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Fir log</td>
+            <td>360 🪙</td>
+        </tr>
+        <tr>
+            <td>Ash log</td>
+            <td>270 🪙</td>
+        </tr>
+        <tr>
+            <td>Willow log</td>
+            <td>243 🪙</td>
+        </tr>
+        <tr>
+            <td>Eucalyptus log</td>
+            <td>180 🪙</td>
+        </tr>
+        <tr>
+            <td>Elder log</td>
+            <td>270 🪙</td>
+        </tr>
+        <tr>
+            <td>RedWood log</td>
+            <td>72 🪙</td>
+        </tr>
+        <tr>
+            <td>Cedar log</td>
+            <td>54 🪙</td>
+        </tr>
+        <tr>
+            <td>Cherry Blossom log</td>
+            <td>36 🪙</td>
+        </tr>
+        <tr>
+            <td>Mahogany log</td>
+            <td>27 🪙</td>
+        </tr>
+        <tr>
+            <td>Chesnut log</td>
+            <td>22.5 🪙</td>
+        </tr>
+        <tr>
+            <td>Magnolia log</td>
+            <td>14 🪙</td>
+        </tr>
+        <tr>
+            <td>Ginko log</td>
+            <td>8 🪙</td>
+        </tr>
+    </table>
+
+    <h2>OTHER ITEMS</h2>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Sell Rate</th>
+        </tr>
+        <tr>
+            <td>Feather</td>
+            <td>405 🪙</td>
+        </tr>
+        <tr>
+            <td>Hide</td>
+            <td>405 🪙</td>
+        </tr>
+        <tr>
+            <td>Yarn</td>
+            <td>720 🪙</td>
+        </tr>
+    </table>
 
 </body>
-</html> 
+</html>
