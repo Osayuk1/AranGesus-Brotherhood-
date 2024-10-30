@@ -1,29 +1,25 @@
-// calculator_for_buyers.js
-
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('calculator-form');
-    const resultDiv = document.getElementById('result');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const selectedItem = form.item-select.value;
-        const quantity = parseInt(form.quantity.value);
-        const sellRate = parseFloat(form.item-select.options[form.item-select.selectedIndex].dataset.price);
-
-        // Debugging logs
-        console.log(`Selected Item: ${selectedItem}`);
-        console.log(`Quantity: ${quantity}`);
-        console.log(`Sell Rate: ${sellRate}`);
-
-        if (selectedItem && !isNaN(quantity) && quantity > 0) {
-            // Calculate total price in gold based on the sell rate
-            const totalPriceGold = (quantity * sellRate).toFixed(2);
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("calculator-form");
+    const resultDiv = document.getElementById("result");
+    
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Get selected item and quantity
+        const selectedItem = document.getElementById("item-select");
+        const quantity = parseFloat(document.getElementById("quantity").value);
+        
+        if (selectedItem.value) {
+            // Get the sell rate from the selected option
+            const sellRate = parseFloat(selectedItem.options[selectedItem.selectedIndex].dataset.price);
+            
+            // Calculate price using the formula: (Quantity / Sell Rate)
+            const price = quantity / sellRate;
 
             // Display the result
-            resultDiv.innerHTML = `Total Price for ${quantity} ${selectedItem}(s) is: 🪙 ${totalPriceGold}`;
+            resultDiv.innerHTML = `Total price for ${quantity} ${selectedItem.value}(s): ${price.toFixed(2)} 🪙`;
         } else {
-            resultDiv.innerHTML = "Please select an item and enter a valid quantity.";
+            resultDiv.innerHTML = "Please select an item.";
         }
     });
 }); 
