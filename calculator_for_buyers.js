@@ -115,9 +115,10 @@ async function processPurchase() {
         }
 
         alert("Purchase processed successfully!");
-        cart = []; // Clear the cart after purchase
+        cart = []; // Clear the cart after successful purchase
         updateCart(); // Update the cart display
     } catch (error) {
-        alert(`Error processing purchase: ${error.message}`);
+        console.error('Error processing purchase:', error);
+        alert("Error processing purchase: " + error.message);
     }
-        } 
+        }
