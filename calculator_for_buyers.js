@@ -1,143 +1,117 @@
-// Define item prices based on sell rates
-const itemPrices = {
-    "Akomeric": 1 / 810,
-    "Bloodroot": 1 / 900,
-    "Hyssop": 1 / 450,
-    "Safflower": 1 / 225,
-    "Sage Leaf": 1 / 225,
-    "WolfMint": 1 / 585,
-    "Vissinel": 1 / 630,
-    "Sunburst Flower": 1 / 22.5,
-    "Ember Fern": 1 / 22.5,
-    "Stone": 1 / 720,
-    "Copper Ore": 1 / 675,
-    "Iron Ore": 1 / 315,
-    "Gold Ore": 1 / 720,
-    "Mithril Ore": 1 / 315,
-    "Evergreen log": 1 / 360,
-    "Oak log": 1 / 360,
-    "Pine log": 1 / 360,
-    "Maple log": 1 / 360,
-    "Birch log": 1 / 360,
-    "Spruce log": 1 / 360,
-    "Fir log": 1 / 360,
-    "Ash log": 1 / 270,
-    "Willow log": 1 / 243,
-    "Eucalyptus log": 1 / 180,
-    "Elder log": 1 / 270,
-    "RedWood log": 1 / 72,
-    "Cedar log": 1 / 54,
-    "Cherry Blossom log": 1 / 36,
-    "Mahogany log": 1 / 27,
-    "Chesnut log": 1 / 22.5,
-    "Magnolia log": 1 / 14,
-    "Ginko log": 1 / 8,
-    "Feather": 1 / 405,
-    "Hide": 1 / 405,
-    "Yarn": 1 / 720,
+const prices = {
+    "Akomeric": 810,
+    "Bloodroot": 600,
+    "Hyssop": 200,
+    "Safflower": 400,
+    "Sage Leaf": 250,
+    "WolfMint": 500,
+    "Vissinel": 300,
+    "Sunburst Flower": 700,
+    "Ember Fern": 450,
+    "Stone": 20,
+    "Copper Ore": 50,
+    "Iron Ore": 100,
+    "Gold Ore": 500,
+    "Mithril Ore": 1000,
+    "Evergreen log": 150,
+    "Oak log": 200,
+    "Pine log": 180,
+    "Maple log": 220,
+    "Birch log": 160,
+    "Spruce log": 140,
+    "Fir log": 120,
+    "Ash log": 180,
+    "Willow log": 190,
+    "Eucalyptus log": 210,
+    "Elder log": 250,
+    "RedWood log": 300,
+    "Cedar log": 240,
+    "Cherry Blossom log": 280,
+    "Mahogany log": 320,
+    "Chesnut log": 260,
+    "Magnolia log": 270,
+    "Ginko log": 290,
+    "Feather": 80,
+    "Hide": 90,
+    "Yarn": 70
 };
 
-// Cart to hold items
 let cart = [];
 
-// Calculate price button event
 document.getElementById("calculatePriceBtn").addEventListener("click", function() {
-    const selectedItem = document.getElementById("itemSelect").value;
-    const quantity = document.getElementById("quantityInput").value;
-    const price = itemPrices[selectedItem] * quantity;
-    document.getElementById("result").innerText = `Price for ${quantity} ${selectedItem}: ${price.toFixed(2)} 🪙`;
+    const item = document.getElementById("itemSelect").value;
+    const quantity = parseInt(document.getElementById("quantityInput").value);
+    const price = (prices[item] / 810) * quantity; // Calculate price based on Akomeric conversion
+    document.getElementById("result").innerText = `Total Price: ${price.toFixed(2)} 🪙`;
 });
 
-// Add to cart button event
 document.getElementById("addToCartBtn").addEventListener("click", function() {
-    const selectedItem = document.getElementById("itemSelect").value;
-    const quantity = document.getElementById("quantityInput").value;
+    const item = document.getElementById("itemSelect").value;
+    const quantity = parseInt(document.getElementById("quantityInput").value);
     const discordName = document.getElementById("discordName").value;
     const tradeName = document.getElementById("tradeName").value;
 
-    // Check if item is already in cart
-    const existingItem = cart.find(item => item.name === selectedItem);
-    if (existingItem) {
-        existingItem.quantity += parseInt(quantity);
-    } else {
-        cart.push({ name: selectedItem, quantity: parseInt(quantity) });
+    if (quantity > 0) {
+        const price = (prices[item] / 810) * quantity;
+        cart.push({ item, quantity, price });
+        updateCart(discordName, tradeName);
     }
-
-    // Update cart display
-    updateCart(discordName, tradeName);
-
-    // Clear input fields
-    document.getElementById("quantityInput").value = 1;
-    document.getElementById("discordName").value = "";
-    document.getElementById("tradeName").value = "";
 });
 
-// Function to update the cart display
-function updateCart(discordName, tradeName) {
-    const cartItemsElement = document.getElementById("cartItems");
-    cartItemsElement.innerHTML = ""; // Clear previous items
-
-    let total = 0;
-
-    cart.forEach(item => {
-        const price = (itemPrices[item.name] * item.quantity).toFixed(2);
-        total += parseFloat(price);
-        const listItem = document.createElement("li");
-        listItem.innerText = `${item.quantity} ${item.name}: ${price} 🪙`;
-        cartItemsElement.appendChild(listItem);
-    });
-
-    // Add Discord and trade names to cart
-    if (discordName) {
-        const discordItem = document.createElement("li");
-        discordItem.innerText = `Discord Name: ${discordName}`;
-        cartItemsElement.appendChild(discordItem);
-    }
-
-    if (tradeName) {
-        const tradeItem = document.createElement("li");
-        tradeItem.innerText = `Trade Name: ${tradeName}`;
-        cartItemsElement.appendChild(tradeItem);
-    }
-
-    document.getElementById("cartTotal").innerText = `Total: ${total.toFixed(2)} 🪙`;
-}
-
-// Buy button event
 document.getElementById("buyBtn").addEventListener("click", function() {
+    if (cart.length === 0) {
+        alert("Your cart is empty. Add items to the cart before purchasing.");
+        return;
+    }
+
     const discordName = document.getElementById("discordName").value;
     const tradeName = document.getElementById("tradeName").value;
 
-    // Prepare data to send to webhook
-    const data = {
+    const purchaseDetails = {
         discordName: discordName,
         tradeName: tradeName,
         items: cart,
-        total: document.getElementById("cartTotal").innerText,
+        total: cart.reduce((total, item) => total + item.price, 0)
     };
 
-    // Send data to webhook
-    fetch("https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk", {
-        method: "POST",
+    fetch('https://discord.com/api/webhooks/1268893038793719859/_ktjZVX-uHx8UVoYu7GAdrpkRLpbysF11nl120aBoWKRwdsY06g_9dAq1HYG7yeWvqwk', {
+        method: 'POST',
+        body: JSON.stringify(purchaseDetails),
         headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        if (response.ok) {
-            alert("Purchase successful!");
-            cart = []; // Clear cart after purchase
-            updateCart(); // Update cart display
-        } else {
-            return response.text().then(text => {
-                console.error("Error response:", text);
-                alert("Error processing purchase: " + text);
-            });
+            'Content-Type': 'application/json'
         }
     })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error processing purchase: ' + response.statusText);
+        }
+        alert("Purchase successful!");
+        cart = []; // Clear cart after purchase
+        updateCart(); // Update cart display
+    })
     .catch(error => {
-        console.error("Error:", error);
-        alert("Error sending data.");
+        alert("Error processing purchase: " + error.message);
     });
-}); 
+});
+
+function updateCart(discordName = "", tradeName = "") {
+    const cartItemsList = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    cartItemsList.innerHTML = ""; // Clear existing items
+
+    cart.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.innerText = `${item.quantity} x ${item.item}: ${item.price.toFixed(2)} 🪙`;
+        cartItemsList.appendChild(listItem);
+    });
+
+    const totalAmount = cart.reduce((total, item) => total + item.price, 0);
+    cartTotal.innerText = `Total: ${totalAmount.toFixed(2)} 🪙`;
+
+    // Show Discord and Trade name in cart
+    if (discordName && tradeName) {
+        const nameInfo = document.createElement("li");
+        nameInfo.innerText = `Discord: ${discordName}, Trade: ${tradeName}`;
+        cartItemsList.appendChild(nameInfo);
+    }
+        } 
