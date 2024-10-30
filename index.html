@@ -5,61 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The AranGesus Brotherhood</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: #f0f0f0;
             text-align: center;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        .container {
+            padding: 50px;
         }
-        .button-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .button-container button {
-            padding: 15px 35px;
-            font-size: 1em;
-            cursor: pointer;
+        .button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #1e3c72;
             border: none;
-            border-radius: 8px;
-            color: #f0f0f0;
-            background-color: #4CAF50;
-            transition: transform 0.2s ease, background-color 0.3s ease;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
         }
-        .button-container button:hover {
-            background-color: #45a049;
-            transform: translateY(-3px);
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-        }
-        .button-container button:active {
-            transform: translateY(2px);
+        .button:hover {
+            background-color: #16355a;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to The AranGesus Brotherhood</h1>
-    <div class="button-container">
-        <button onclick="location.href='seller-calculator.html'">Calculator for Sellers</button>
-        <button onclick="location.href='buyer-calculator.html'">Calculator for Buyers</button>
-        <button onclick="location.href='price-list.html'">Price List</button>
+
+    <div class="container">
+        <h1>Welcome to The AranGesus Brotherhood</h1>
+        <p>Your hub for game resources!</p>
+        <a href="seller-calculator.html" class="button">Calculator for Sellers</a>
+        <a href="buyer-calculator.html" class="button">Calculator for Buyers</a>
+        <a href="price-list.html" class="button">Price List</a>
     </div>
+
 </body>
-</html> 
+</html>
