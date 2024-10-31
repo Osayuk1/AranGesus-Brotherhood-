@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator for Buyers</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="calculator.css">
 </head>
 <body>
     <h1>Calculator for Buyers</h1>
     <div id="calculator">
+        <!-- Item Selection -->
         <label for="itemSelect">Select Item:</label>
         <select id="itemSelect">
             <option value="Akomeric">Akomeric</option>
@@ -40,7 +41,7 @@
             <option value="Cedar log">Cedar log</option>
             <option value="Cherry Blossom log">Cherry Blossom log</option>
             <option value="Mahogany log">Mahogany log</option>
-            <option value="Chesnut log">Chesnut log</option>
+            <option value="Chestnut log">Chestnut log</option>
             <option value="Magnolia log">Magnolia log</option>
             <option value="Ginko log">Ginko log</option>
             <option value="Feather">Feather</option>
@@ -48,14 +49,17 @@
             <option value="Yarn">Yarn</option>
         </select>
 
+        <!-- Quantity Input -->
         <label for="quantityInput">Quantity:</label>
         <input type="number" id="quantityInput" min="1" value="1">
 
+        <!-- Action Buttons -->
         <button id="calculatePriceBtn">Calculate Price</button>
         <button id="addToCartBtn">Add to Cart</button>
 
+        <!-- Calculation Result -->
         <div id="result"></div>
-        
+
         <!-- User Input for Discord and Trade Names -->
         <label for="discordName">Discord Name:</label>
         <input type="text" id="discordName" required>
@@ -67,10 +71,12 @@
         <div id="cart">
             <h2>Cart</h2>
             <ul id="cartItems"></ul>
-            <p id="cartTotal"></p>
+            <p id="cartTotal">Total: 🪙 0</p>
             <button id="buyBtn">Buy</button>
         </div>
     </div>
+    
+    <!-- JavaScript File -->
     <script src="calculator_for_buyers.js"></script>
 </body>
 </html>
